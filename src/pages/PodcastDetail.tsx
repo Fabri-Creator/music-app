@@ -21,7 +21,7 @@ const formatDate = (dateString: string) => {
     });
 };
 
-function Detail() {
+function PodcastDetail() {
     const { id } = useParams<{ id: string }>();
     const [details, loading, error] = usePodcast(id);
     const [data] = useData();
@@ -87,7 +87,7 @@ function Detail() {
                             {details.results.slice(1).map((episode) => (
                                 <TableRow key={episode.trackId}>
                                     <TableCell className="border-b border-gray-300">
-                                        <Link to={`/episode/${episode.trackId}`}>
+                                        <Link to={`/episode/${id}/${episode.trackId}`}>
                                             {episode.trackName}
                                         </Link>
                                     </TableCell>
@@ -103,4 +103,4 @@ function Detail() {
     );
 }
 
-export default Detail;
+export default PodcastDetail;

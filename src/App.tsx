@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import MainView from './pages/MainView'
 import PodcastDetail from './pages/PodcastDetail'
+import EpisodeDetail from './pages/EpisodeDetail'
 
 
 function App() {
@@ -10,6 +11,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainView />} />
         <Route path="/detail/:id" element={<PodcastDetail />} />
+        <Route path="/episode/:id/:trackId" element={<EpisodeDetail />} />
       </Routes>
     </BrowserRouter>
 
