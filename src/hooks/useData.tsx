@@ -2,7 +2,8 @@
 import { useEffect, useState } from "react";
 import { RootObject } from "../types";
 
-const STORAGE_KEY = 'externalData';
+const STORAGE_MAIN_DATA = 'podcastData';
+
 const EXPIRATION_TIME = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
 
 const useData = (): [RootObject | undefined, boolean, boolean] => {
@@ -16,7 +17,7 @@ const useData = (): [RootObject | undefined, boolean, boolean] => {
             setError(false);
 
             try {
-                const storedData = localStorage.getItem(STORAGE_KEY);
+                const storedData = localStorage.getItem(STORAGE_MAIN_DATA);
 
                 if (storedData) {
                     const { timestamp, value } = JSON.parse(storedData);
@@ -38,7 +39,7 @@ const useData = (): [RootObject | undefined, boolean, boolean] => {
 
 
                 setData(jsonData);
-                localStorage.setItem(STORAGE_KEY, JSON.stringify({ timestamp: Date.now(), value: jsonData }));
+                localStorage.setItem(STORAGE_MAIN_DATA, JSON.stringify({ timestamp: Date.now(), value: jsonData }));
             } catch (error) {
                 console.error("Fetch error:", error);
                 setError(true);

@@ -23,6 +23,9 @@ export interface Icon {
 }
 
 export interface Entry {
+    value: SetStateAction<Entry | undefined>;
+    results: any;
+    timestamp: number;
     category:         Category;
     id:               ID;
     "im:artist":      IMArtist;

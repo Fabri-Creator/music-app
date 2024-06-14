@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { useDataContext } from '../context/DataContext';
+import { useState, useEffect } from 'react';
 import { Entry } from "../types";
 import PodcastCard from "./PodcastCard";
+import useData from '../hooks/useData';
 
 function PodcastList() {
-    const { data, loading, error } = useDataContext();
+    const [data, loading, error] = useData();
     const [searchText, setSearchText] = useState('');
     const [filteredPodcasts, setFilteredPodcasts] = useState<Entry[]>([]);
     const [entryCount, setEntryCount] = useState<number>(0);
@@ -12,7 +12,7 @@ function PodcastList() {
     useEffect(() => {
         if (data && data.feed && data.feed.entry) {
             setFilteredPodcasts(data.feed.entry);
-            setEntryCount(data.feed.entry.length); 
+            setEntryCount(data.feed.entry.length);
         }
     }, [data]);
 
@@ -23,7 +23,7 @@ function PodcastList() {
                 podcast['im:artist'].label.toLowerCase().includes(searchText.toLowerCase())
             );
             setFilteredPodcasts(filtered);
-            setEntryCount(filtered.length); 
+            setEntryCount(filtered.length);
         }
     }, [searchText, data]);
 
@@ -32,7 +32,7 @@ function PodcastList() {
     }
 
     if (error || !data || !data.feed || !data.feed.entry) {
-        return <div>Error loading data.</div>;
+        return <div>Error loading data</div>;
     }
 
     return (
@@ -47,7 +47,7 @@ function PodcastList() {
                     value={searchText}
                     onChange={(e) => setSearchText(e.target.value)}
                     className="w-1/3 p-2 border border-gray-300 rounded"
-                    style={{ height: '2.5rem' }} 
+                    style={{ height: '2.5rem' }}
                 />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 p-4">

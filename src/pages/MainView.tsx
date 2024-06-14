@@ -1,4 +1,3 @@
-import React from 'react';
 import PodcastList from '../components/PodcastList';
 import Header from '../components/Header';
 
