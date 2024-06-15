@@ -22,7 +22,7 @@ const usePodcastDetail = (id: string | undefined): [Entry | undefined, boolean, 
 
                 // Verificar que id tenga un valor antes de comparar
                 if (id) {
-                    const cachedEntry = podcastDetailArray.find(podcast => podcast.id === id);
+                    const cachedEntry = podcastDetailArray.find(podcast => podcast.id.toString() === id);
 
                     if (cachedEntry) {
                         // Si encontramos un caché, establecemos los datos y salimos

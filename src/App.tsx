@@ -10,7 +10,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<MainView />} />
-        <Route path="/detail/:id" element={<PodcastDetail />} />
+        <Route path="/podcast/:id" element={<PodcastDetail />} />
         <Route path="/episode/:id/:trackId" element={<EpisodeDetail />} />
       </Routes>
     </BrowserRouter>

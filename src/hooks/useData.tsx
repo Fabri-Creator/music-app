@@ -4,7 +4,7 @@ import { RootObject } from "../types";
 
 const STORAGE_MAIN_DATA = 'podcastData';
 
-const EXPIRATION_TIME = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+const EXPIRATION_TIME = 24 * 60 * 60 * 1000;
 
 const useData = (): [RootObject | undefined, boolean, boolean] => {
     const [data, setData] = useState<RootObject | undefined>(undefined);

@@ -16,12 +16,16 @@ function PodcastList() {
         }
     }, [data]);
 
+    const filterPodcasts = (entry: Entry[], searchText: string) => {
+        return entry.filter((podcast: Entry) =>
+            podcast.title.label.toLowerCase().includes(searchText.toLowerCase()) ||
+            podcast['im:artist'].label.toLowerCase().includes(searchText.toLowerCase())
+        );
+    };
+
     useEffect(() => {
         if (data && data.feed && data.feed.entry) {
-            const filtered = data.feed.entry.filter((podcast: Entry) =>
-                podcast.title.label.toLowerCase().includes(searchText.toLowerCase()) ||
-                podcast['im:artist'].label.toLowerCase().includes(searchText.toLowerCase())
-            );
+            const filtered = filterPodcasts(data.feed.entry, searchText);
             setFilteredPodcasts(filtered);
             setEntryCount(filtered.length);
         }
@@ -36,7 +40,7 @@ function PodcastList() {
     }
 
     return (
-        <div>
+        <>
             <div className="p-4 flex justify-end items-center">
                 <div className="ml-4 bg-blue-400 text-white px-4 mx-4 py-2 rounded h-10 flex items-center">
                     {entryCount}
@@ -55,7 +59,7 @@ function PodcastList() {
                     <PodcastCard key={index} podcastInfo={podcast} />
                 ))}
             </div>
-        </div>
+        </>
     );
 }
 
