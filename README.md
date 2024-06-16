@@ -10,12 +10,13 @@ This README provides instructions on how to run the project in both development 
 
 1. **Clone Repository:**
 git clone https://github.com/Fabri-Creator/music-app>
+
 cd music-app
 
-2. **Install Dependencies:**
+3. **Install Dependencies:**
 npm install
 
-3. **Start Development Server:**
+4. **Start Development Server:**
 npm run dev  
 
 This command will start the development server. By default, it should open a new browser window/tab with the development version of your project running. Changes made to the code will trigger hot reloading, updating the application in real-time.
