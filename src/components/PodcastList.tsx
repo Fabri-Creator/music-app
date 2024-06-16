@@ -1,11 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import { Entry } from "../types";
 import PodcastCard from "./PodcastCard";
-import usePodcasterData from '../hooks/usePodcasterData';
+import usePodcasterData from "../hooks/usePodcasterData";
 
 function PodcastList() {
     const [podcastData, loading, error] = usePodcasterData();
-    const [searchText, setSearchText] = useState('');
+    const [searchText, setSearchText] = useState("");
     const [filteredPodcasts, setFilteredPodcasts] = useState<Entry[]>([]);
     const [episodesCount, setEpisodesCount] = useState<number>(0);
 
@@ -17,9 +17,12 @@ function PodcastList() {
     }, [podcastData]);
 
     const filterPodcasts = (entry: Entry[], searchText: string) => {
-        return entry.filter((podcast: Entry) =>
-            podcast.title.label.toLowerCase().includes(searchText.toLowerCase()) ||
-            podcast['im:artist'].label.toLowerCase().includes(searchText.toLowerCase())
+        return entry.filter(
+            (podcast: Entry) =>
+                podcast.title.label.toLowerCase().includes(searchText.toLowerCase()) ||
+                podcast["im:artist"].label
+                    .toLowerCase()
+                    .includes(searchText.toLowerCase())
         );
     };
 
@@ -51,7 +54,7 @@ function PodcastList() {
                     value={searchText}
                     onChange={(e) => setSearchText(e.target.value)}
                     className="w-1/3 p-2 border border-gray-300 rounded"
-                    style={{ height: '2.5rem' }}
+                    style={{ height: "2.5rem" }}
                 />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 p-4">

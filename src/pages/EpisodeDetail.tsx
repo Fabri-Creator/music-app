@@ -1,26 +1,30 @@
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import Header from '../components/Header';
-import SideDetail from '../components/SideDetail';
-import useEpisodesData from '../hooks/useEpisodesData';
-import usePodcasterData from '../hooks/usePodcasterData';
-import { Entry, Result } from '../types';
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import Header from "../components/Header";
+import SideDetail from "../components/SideDetail";
+import useEpisodesData from "../hooks/useEpisodesData";
+import usePodcasterData from "../hooks/usePodcasterData";
+import { Entry, Result } from "../types";
 
 function EpisodeDetail() {
-    const { id, trackId } = useParams<{ id: string, trackId: string }>();
+    const { id, trackId } = useParams<{ id: string; trackId: string }>();
     const [episodesData] = useEpisodesData(id);
     const [podcastDetail, setPodcastDetail] = useState<Entry | null>(null);
     const [podcastData] = usePodcasterData();
     const [episode, setEpisode] = useState<Result | null>(null);
 
     useEffect(() => {
-        const filteredPodcast = podcastData?.feed.entry?.find((podcast: Entry) => podcast.id.attributes['im:id'] === id);
+        const filteredPodcast = podcastData?.feed.entry?.find(
+            (podcast: Entry) => podcast.id.attributes["im:id"] === id
+        );
         setPodcastDetail(filteredPodcast || null);
     }, [podcastData, id]);
 
     useEffect(() => {
         if (episodesData) {
-            const filteredEpisode = episodesData.results.slice(1).find((ep: Result) => ep.trackId.toString() === trackId);
+            const filteredEpisode = episodesData.results
+                .slice(1)
+                .find((ep: Result) => ep.trackId.toString() === trackId);
             setEpisode(filteredEpisode || null);
         }
     }, [episodesData, trackId]);
@@ -41,11 +45,15 @@ function EpisodeDetail() {
                             <h4 className="text-lg">{episode.trackName}</h4>
                         </div>
                         <div className="px-6 py-2">
-                            <p className="text-sm text-gray-600 text-justify">{episode.description}</p>
+                            <p className="text-sm text-gray-600 text-justify">
+                                {episode.description}
+                            </p>
                         </div>
-                        <audio controls className="w-4/5 mx-auto bg-gray-100 my-4">
-                            <source src={episode.episodeUrl} type="audio/mpeg" />
-                        </audio>
+                        <div className="w-4/5 mx-auto bg-gray-100 my-4">
+                            <audio controls>
+                                <source src={episode.episodeUrl} type="audio/mpeg" />
+                            </audio>
+                        </div>
                     </div>
                 )}
             </div>

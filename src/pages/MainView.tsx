@@ -1,5 +1,5 @@
-import PodcastList from '../components/PodcastList';
-import Header from '../components/Header';
+import PodcastList from "../components/PodcastList";
+import Header from "../components/Header";
 
 function MainView() {
     return (
