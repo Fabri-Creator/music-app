@@ -42,5 +42,6 @@ Open your web browser and navigate to http://localhost:5173 (or another specifie
 This serves the built project at http://localhost:3000 (or another specified port).
 
 4. **Access the Production Application:**
+
 Open your web browser and navigate to http://localhost:3000 (or the port specified). You should see the production version of your application.
 
