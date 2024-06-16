@@ -2,28 +2,28 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import SideDetail from '../components/SideDetail';
-import usePodcast from '../hooks/usePodcast';
-import useData from '../hooks/useData';
+import useEpisodesData from '../hooks/useEpisodesData';
+import usePodcasterData from '../hooks/usePodcasterData';
 import { Entry, Result } from '../types';
 
 function EpisodeDetail() {
     const { id, trackId } = useParams<{ id: string, trackId: string }>();
-    const [podcastData] = usePodcast(id);
+    const [episodesData] = useEpisodesData(id);
     const [podcastDetail, setPodcastDetail] = useState<Entry | null>(null);
-    const [data] = useData();
+    const [podcastData] = usePodcasterData();
     const [episode, setEpisode] = useState<Result | null>(null);
 
     useEffect(() => {
-        const filteredPodcast = data?.feed.entry?.find((podcast: Entry) => podcast.id.attributes['im:id'] === id);
+        const filteredPodcast = podcastData?.feed.entry?.find((podcast: Entry) => podcast.id.attributes['im:id'] === id);
         setPodcastDetail(filteredPodcast || null);
-    }, [data, id]);
+    }, [podcastData, id]);
 
     useEffect(() => {
-        if (podcastData) {
-            const filteredEpisode = podcastData.results.slice(1).find((ep: Result) => ep.trackId.toString() === trackId);
+        if (episodesData) {
+            const filteredEpisode = episodesData.results.slice(1).find((ep: Result) => ep.trackId.toString() === trackId);
             setEpisode(filteredEpisode || null);
         }
-    }, [podcastData, trackId]);
+    }, [episodesData, trackId]);
 
     if (!episode) {
         return <div>Loading...</div>;

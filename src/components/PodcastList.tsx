@@ -1,20 +1,20 @@
 import { useState, useEffect } from 'react';
 import { Entry } from "../types";
 import PodcastCard from "./PodcastCard";
-import useData from '../hooks/useData';
+import usePodcasterData from '../hooks/usePodcasterData';
 
 function PodcastList() {
-    const [data, loading, error] = useData();
+    const [podcastData, loading, error] = usePodcasterData();
     const [searchText, setSearchText] = useState('');
     const [filteredPodcasts, setFilteredPodcasts] = useState<Entry[]>([]);
-    const [entryCount, setEntryCount] = useState<number>(0);
+    const [episodesCount, setEpisodesCount] = useState<number>(0);
 
     useEffect(() => {
-        if (data && data.feed && data.feed.entry) {
-            setFilteredPodcasts(data.feed.entry);
-            setEntryCount(data.feed.entry.length);
+        if (podcastData && podcastData.feed && podcastData.feed.entry) {
+            setFilteredPodcasts(podcastData.feed.entry);
+            setEpisodesCount(podcastData.feed.entry.length);
         }
-    }, [data]);
+    }, [podcastData]);
 
     const filterPodcasts = (entry: Entry[], searchText: string) => {
         return entry.filter((podcast: Entry) =>
@@ -24,18 +24,18 @@ function PodcastList() {
     };
 
     useEffect(() => {
-        if (data && data.feed && data.feed.entry) {
-            const filtered = filterPodcasts(data.feed.entry, searchText);
+        if (podcastData && podcastData.feed && podcastData.feed.entry) {
+            const filtered = filterPodcasts(podcastData.feed.entry, searchText);
             setFilteredPodcasts(filtered);
-            setEntryCount(filtered.length);
+            setEpisodesCount(filtered.length);
         }
-    }, [searchText, data]);
+    }, [searchText, podcastData]);
 
     if (loading) {
         return <div>Loading...</div>;
     }
 
-    if (error || !data || !data.feed || !data.feed.entry) {
+    if (error || !podcastData || !podcastData.feed || !podcastData.feed.entry) {
         return <div>Error loading data</div>;
     }
 
@@ -43,7 +43,7 @@ function PodcastList() {
         <>
             <div className="p-4 flex justify-end items-center">
                 <div className="ml-4 bg-blue-400 text-white px-4 mx-4 py-2 rounded h-10 flex items-center">
-                    {entryCount}
+                    {episodesCount}
                 </div>
                 <input
                     type="text"

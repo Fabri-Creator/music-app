@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Header from '../components/Header';
 import SideDetail from '../components/SideDetail';
-import usePodcast from '../hooks/usePodcast';
-import useData from '../hooks/useData';
+import useEpisodesData from '../hooks/useEpisodesData';
+import usePodcasterData from '../hooks/usePodcasterData';
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from '@nextui-org/react';
 import { Entry, Result } from '../types';
 import formatDate from '../utils/formatDate';
@@ -11,8 +11,8 @@ import millisToMinutesAndSeconds from '../utils/millisToMinutesAndSeconds';
 
 function PodcastDetail() {
     const { id } = useParams<{ id: string }>();
-    const [podcastData, loadingPodcast, errorPodcast] = usePodcast(id);
-    const [data] = useData();
+    const [episodesData, isLoading, hasError] = useEpisodesData(id);
+    const [data] = usePodcasterData();
 
     const [podcastDetail, setPodcastDetail] = useState<Entry | null>(null);
 
@@ -21,11 +21,11 @@ function PodcastDetail() {
         setPodcastDetail(filteredPodcast || null);
     }, [data, id]);
 
-    if (loadingPodcast) {
+    if (isLoading) {
         return <div>Loading...</div>;
     }
 
-    if (errorPodcast || !podcastData) {
+    if (hasError || !episodesData) {
         return (
             <div className="flex items-center justify-center h-screen">
                 <div className="text-center">
@@ -43,7 +43,7 @@ function PodcastDetail() {
 
                 <div className="flex-1">
                     <div className="p-4 bg-white shadow border border-gray-300 mb-4 rounded-lg">
-                        <h4>{`Episodes: ${podcastData.resultCount - 1}`}</h4>
+                        <h4>{`Episodes: ${episodesData.resultCount - 1}`}</h4>
                     </div>
 
                     <Table aria-label="Episode List">
@@ -53,7 +53,7 @@ function PodcastDetail() {
                             <TableColumn className="border-b border-gray-300 text-left">Duration</TableColumn>
                         </TableHeader>
                         <TableBody>
-                            {podcastData.results.slice(1).map((episode: Result) => (
+                            {episodesData.results.slice(1).map((episode: Result) => (
                                 <TableRow key={episode.trackId}>
                                     <TableCell className="border-b border-gray-300">
                                         <Link to={`/episode/${id}/${episode.trackId}`}>
