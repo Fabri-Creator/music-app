@@ -9,7 +9,7 @@ This README provides instructions on how to run the project in both development 
 ### Setup
 
 1. **Clone Repository:**
-* git clone https://github.com/Fabri-Creator/music-app>
+* git clone https://github.com/Fabri-Creator/music-app
 * cd music-app
 
 3. **Install Dependencies:**
