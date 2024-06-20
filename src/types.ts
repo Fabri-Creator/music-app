@@ -44,14 +44,14 @@ export interface Entry {
 }
 
 export interface Category {
-    attributes: CategoryAttributes;
+    attributes?: CategoryAttributes;
 }
 
 export interface CategoryAttributes {
-    "im:id": string;
-    label:   PurpleLabel;
-    scheme:  string;
-    term:    PurpleLabel;
+    "im:id"?: string;
+    label?:   PurpleLabel | undefined;
+    scheme?:  string;
+    term?:    PurpleLabel;
 }
 
 export enum PurpleLabel {
@@ -84,8 +84,8 @@ export interface IMContentType {
 }
 
 export interface IMContentTypeAttributes {
-    label: FluffyLabel;
-    term:  FluffyLabel;
+    label: FluffyLabel | undefined;
+    term?:  FluffyLabel;
 }
 
 export enum FluffyLabel {
@@ -93,7 +93,7 @@ export enum FluffyLabel {
 }
 
 export interface IMImage {
-    attributes: IMImageAttributes;
+    attributes?: IMImageAttributes;
     label:      string;
 }
 
@@ -102,8 +102,8 @@ export interface IMImageAttributes {
 }
 
 export interface IMPrice {
-    attributes: IMPriceAttributes;
-    label:      IMPriceLabel;
+    attributes?: IMPriceAttributes;
+    label:      IMPriceLabel | undefined;
 }
 
 export interface IMPriceAttributes {
@@ -120,8 +120,8 @@ export enum IMPriceLabel {
 }
 
 export interface IMReleaseDate {
-    attributes: Icon;
-    label:      Date;
+    attributes?: Icon;
+    label:      Date | string;
 }
 
 export interface Link {
@@ -130,7 +130,7 @@ export interface Link {
 
 export interface LinkAttributes {
     href:  string;
-    rel:   Rel;
+    rel?:   Rel;
     type?: Type;
 }
 

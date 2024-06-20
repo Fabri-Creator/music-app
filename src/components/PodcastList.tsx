@@ -57,7 +57,7 @@ function PodcastList() {
                     style={{ height: "2.5rem" }}
                 />
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 p-4">
+            <div data-testid="card" className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 p-4">
                 {filteredPodcasts.map((podcast: Entry, index: number) => (
                     <PodcastCard key={index} podcastInfo={podcast} />
                 ))}
