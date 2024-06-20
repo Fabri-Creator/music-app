@@ -1,30 +1,47 @@
-# React + TypeScript + Vite
+# Project Execution Guide
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This README provides instructions on how to run the project in both development and production modes.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Development Mode
 
-## Expanding the ESLint configuration
+### Setup
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+1. **Clone Repository:**
+* git clone https://github.com/Fabri-Creator/music-app
+* cd music-app
 
-- Configure the top-level `parserOptions` property like this:
+3. **Install Dependencies:**
+* npm install
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+4. **Start Development Server:**
+* npm run dev  
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+This command will start the development server. By default, it should open a new browser window/tab with the development version of your project running. Changes made to the code will trigger hot reloading, updating the application in real-time.
+
+Open your web browser and navigate to http://localhost:5173 (or another specified port if configured differently). You should see the application running in development mode.
+
+
+## Production Mode
+
+### To run the project in production mode, follow these steps:
+
+1. **Build the Project:**
+* npm run build
+
+  This command generates a production-ready build of the project in the dist directory.
+
+3. **Serve the Build:**
+  Use a static server to serve the built files. You can use tools like serve for this purpose:
+
+* npm install -g serve
+  
+* serve -s build
+
+This serves the built project at http://localhost:3000 (or another specified port).
+
+4. **Access the Production Application:**
+
+Open your web browser and navigate to http://localhost:3000 (or the port specified). You should see the production version of your application.
+
