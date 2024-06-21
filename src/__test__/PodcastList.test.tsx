@@ -37,9 +37,8 @@ describe("PodcastList", () => {
         waitFor(() => screen.getByText(/A History of Rock Music in 500 Songs/i));
         waitFor(() => screen.getByPlaceholderText(/Search podcasts/i));
 
-        const searchInput = screen.getByPlaceholderText(/Search podcasts/i);
-
         waitFor(() => {
+            const searchInput = screen.getByPlaceholderText(/Search podcasts/i);
             expect(searchInput).toBeInTheDocument();
 
             // Filter for "The Joe Budden"
