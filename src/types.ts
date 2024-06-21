@@ -32,7 +32,7 @@ export interface Entry {
     category:         Category;
     id:               ID;
     "im:artist":      IMArtist;
-    "im:contentType": IMContentType;
+    "im:contentType": IMContentType | undefined;
     "im:image":       IMImage[];
     "im:name":        Icon;
     "im:price":       IMPrice;
@@ -80,7 +80,7 @@ export interface IMArtistAttributes {
 }
 
 export interface IMContentType {
-    attributes: IMContentTypeAttributes;
+    attributes?: IMContentTypeAttributes;
 }
 
 export interface IMContentTypeAttributes {
