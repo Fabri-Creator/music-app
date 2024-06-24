@@ -15,7 +15,6 @@ const CustomTable: React.FC<TableProps> = ({ episodes, podcastId }) => {
     if (!episodes || !podcastId) {
         return <div>No podcast available</div>;
     }
-    console.log("Episodes", episodes)
     return (
         <Table aria-label="Episode List">
             <TableHeader>

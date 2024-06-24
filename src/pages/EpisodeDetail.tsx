@@ -4,14 +4,14 @@ import Header from "../components/Header";
 import SideDetail from "../components/SideDetail";
 import useEpisodesData from "../hooks/useEpisodesData";
 import usePodcasterData from "../hooks/usePodcasterData";
-import { Entry, Result } from "../types";
+import { Entry, Episode } from "../types";
 
 function EpisodeDetail() {
     const { id, trackId } = useParams<{ id: string; trackId: string }>();
     const [episodesData] = useEpisodesData(id);
     const [podcastDetail, setPodcastDetail] = useState<Entry | null>(null);
     const [podcastData] = usePodcasterData();
-    const [episode, setEpisode] = useState<Result | null>(null);
+    const [episode, setEpisode] = useState<Episode | null>(null);
 
     useEffect(() => {
         const filteredPodcast = podcastData?.feed.entry?.find(
@@ -24,7 +24,7 @@ function EpisodeDetail() {
         if (episodesData) {
             const filteredEpisode = episodesData.results
                 .slice(1)
-                .find((ep: Result) => ep.trackId.toString() === trackId);
+                .find((ep: Episode) => ep.trackId.toString() === trackId);
             setEpisode(filteredEpisode || null);
         }
     }, [episodesData, trackId]);
@@ -49,7 +49,7 @@ function EpisodeDetail() {
                                 {episode.description}
                             </p>
                         </div>
-                        <div className="w-4/5 mx-auto bg-gray-100 my-4">
+                        <div className="w-4/5 flex justify-center items-center mx-auto bg-gray-100 my-4">
                             <audio controls>
                                 <source src={episode.episodeUrl} type="audio/mpeg" />
                             </audio>
