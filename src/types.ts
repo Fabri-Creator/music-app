@@ -145,10 +145,10 @@ export enum Type {
 
 export interface EpisodesObject {
     resultCount: number;
-    episodeResults: Result[];
+    episodeResults: Episode[];
    }
    
-   export interface Result {
+   export interface Episode {
     artistId?:               number;
     artistIds?:              number[];
     artistName?:             string;

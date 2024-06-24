@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
 import SideDetail from '../components/SideDetail';
 import useEpisodesData from '../hooks/useEpisodesData';
 import usePodcasterData from '../hooks/usePodcasterData';
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from '@nextui-org/react';
-import { Entry, Result } from '../types';
-import formatDate from '../utils/formatDate';
-import millisToMinutesAndSeconds from '../utils/millisToMinutesAndSeconds';
+import CustomTable from '../components/CustomTable';
+import { Entry } from '../types';
 
 function PodcastDetail() {
     const { id } = useParams<{ id: string }>();
@@ -21,9 +19,12 @@ function PodcastDetail() {
         setPodcastDetail(filteredPodcast || null);
     }, [data, id]);
 
+    // Extract only episodes. First element of episodeData brings only podcast general information
+    const filterdEpisodes = episodesData?.results.slice(1);
+
     if (isLoading) {
         return <div>Loading...</div>;
-    }
+    } 1
 
     if (hasError || !episodesData) {
         return (
@@ -43,30 +44,9 @@ function PodcastDetail() {
 
                 <div className="flex-1">
                     <div className="p-4 bg-white shadow border border-gray-300 mb-4 rounded-lg">
-                        <h4>{`Episodes: ${episodesData.resultCount - 1}`}</h4>
+                        <h4>{`Episodes: ${filterdEpisodes.length}`}</h4>
                     </div>
-
-                    <Table aria-label="Episode List">
-                        <TableHeader>
-                            <TableColumn className="border-b border-gray-300">Title</TableColumn>
-                            <TableColumn className="border-b border-gray-300 text-left">Date</TableColumn>
-                            <TableColumn className="border-b border-gray-300 text-left">Duration</TableColumn>
-                        </TableHeader>
-                        <TableBody>
-                            {episodesData.results.slice(1).map((episode: Result) => (
-                                <TableRow key={episode.trackId}>
-                                    <TableCell className="border-b border-gray-300">
-                                        <Link to={`/episode/${id}/${episode.trackId}`}>
-                                            {episode.trackName}
-                                        </Link>
-                                    </TableCell>
-                                    <TableCell className="border-b border-gray-300 text-left">{formatDate(episode.releaseDate.toString())}</TableCell>
-                                    <TableCell className="border-b border-gray-300 text-left">{millisToMinutesAndSeconds(Number(episode.trackTimeMillis))}</TableCell>
-                                </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-
+                    {<CustomTable episodes={filterdEpisodes} podcastId={id} ></CustomTable>}
                 </div>
             </div>
         </div>
