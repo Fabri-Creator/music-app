@@ -2,6 +2,7 @@
 
 This README provides instructions on how to run the project in both development and production modes.
 
+Test cases added for a part of the product to demonstrate how would be the entire app testing.
 ---
 
 ## Development Mode
